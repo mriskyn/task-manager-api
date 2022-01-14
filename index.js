@@ -6,6 +6,8 @@ const routes = require('./routes/tasks');
 const connectDB = require('./db/connect');
 
 app.use(express.json());
+app.use(express.static('./public'));
+
 
 app.use('/api/v1/tasks', routes);
 
