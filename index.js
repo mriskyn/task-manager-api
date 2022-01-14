@@ -4,10 +4,17 @@ const app = express();
 const PORT = 3000;
 const routes = require('./routes/tasks');
 const connectDB = require('./db/connect');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs');
 
 app.use(express.json());
 app.use(express.static('./public'));
 
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, { customSiteTitle: 'Task Manager API Docs' })
+);
 app.use('/api/v1/tasks', routes);
 
 const start = async () => {

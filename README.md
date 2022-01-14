@@ -48,3 +48,8 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 ## Running the project
 
     $ npm start
+
+
+## API Documentation
+
+After you running the project, access your browser and go to url `http://localhost:port/api-docs`
