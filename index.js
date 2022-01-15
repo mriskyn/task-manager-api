@@ -10,11 +10,17 @@ const swaggerDocument = require('./docs');
 app.use(express.json());
 app.use(express.static('./public'));
 
-app.use(
-  '/api-docs',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, { customSiteTitle: 'Task Manager API Docs' })
-);
+if(process.env.NODE_ENV === "production"){
+  app.use('/api-docs', (req, res, next) => {
+    res.status(404).send("Not Found");
+  });
+} else {
+  app.use(
+    '/api-docs',
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, { customSiteTitle: 'Task Manager API Docs' })
+  );
+}
 app.use('/api/v1/tasks', routes);
 
 const start = async () => {
